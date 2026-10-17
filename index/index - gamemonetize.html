@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+       <head>
+              <title>Mahjong</title>
+              <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+              <meta id="gameViewport" name="viewport" content="width=device-width initial-scale=1">
+              <link href="styles.css" rel="stylesheet" type="text/css">
+			  
+			<script src="sdk.js"></script> 
+
+			<script type="text/javascript">
+			   window.SDK_OPTIONS = {
+				  gameId: "8ixrfv673ox0ksq9pb66t4yq4f6r0yn3",
+				  onEvent: function (a) {
+					 switch (a.name) {
+						case "SDK_GAME_PAUSE":
+						   // pause game logic / mute audio
+						   break;
+						case "SDK_GAME_START":
+						   // advertisement done, resume game logic and unmute audio
+						   break;
+						case "SDK_READY":
+						   
+						   if (typeof sdk !== 'undefined' && sdk.showBanner !== 'undefined') { sdk.showBanner(); }
+						   
+						   break;
+					 }
+				  }
+			   };
+			(function (a, b, c) {
+			   var d = a.getElementsByTagName(b)[0];
+			   a.getElementById(c) || (a = a.createElement(b), a.id = c, a.src = "https://api.gamemonetize.com/sdk.js", d.parentNode.insertBefore(a, d))
+			})(document, "script", "gamemonetize-sdk"); 
+			</script>
+			  
+       </head>
+
+       <body>
+              <div align="center" id="embed-html"></div>
+              <script type="text/javascript" src="html/html.nocache.js"></script>
+       </body>
+
+       <script>
+              function handleMouseDown(evt) {
+                evt.preventDefault();
+                evt.stopPropagation();
+                window.focus();
+              }
+
+              function handleMouseUp(evt) {
+                evt.preventDefault();
+                evt.stopPropagation();
+              }
+				  
+			  function contextMenu(evt) {
+                evt.preventDefault();
+                evt.stopPropagation();
+              }
+			  
+              document.getElementById('embed-html').addEventListener('mousedown', handleMouseDown, false);
+              document.getElementById('embed-html').addEventListener('mouseup', handleMouseUp, false);
+			  document.getElementById('embed-html').addEventListener('contextmenu', contextMenu, false);  
+       </script>
+</html>

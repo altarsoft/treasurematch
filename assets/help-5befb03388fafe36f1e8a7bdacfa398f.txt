@@ -1,0 +1,4 @@
+Play the addictive treasure match 3 puzzle.
+Remove jewels and gems from the screen.
+Match them in a line of two and more.
+Smash all colored tiles to complete the level.
