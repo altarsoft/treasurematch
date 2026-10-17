@@ -25,6 +25,9 @@
 
 	// Для VK Play и VK Mini Apps язык по умолчанию — русский
 	if (portal === 'vkplay' || portal === 'vk') { window.lang = 'ru'; }
+	// Остальные порталы без SDK-языка — язык браузера:
+	// ядро игры ждёт непустой $wnd.lang на экране загрузки
+	else if (!window.lang) { window.lang = (navigator.language || 'en').slice(0, 2).toLowerCase(); }
 
 	function addSdk(src, onload) {
 		var s = document.createElement('script');
