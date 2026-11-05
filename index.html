@@ -6,7 +6,11 @@
               <meta id="gameViewport" name="viewport" content="width=device-width initial-scale=1">
               <link href="styles.css" rel="stylesheet" type="text/css">
 
-	      	      	      	      <!-- Единый index для всех порталов: портал определяет portal.js и подключает только его SDK -->
+	      <!-- YouTube Playables SDK: обязателен ДО любого кода игры (требование сертификации);
+	           вне Playables он no-op и другим порталам не мешает -->
+	      <script src="https://www.youtube.com/game_api/v1"></script>
+
+	      <!-- Единый index для всех порталов: портал определяет portal.js и подключает только его SDK -->
 	      <script src="portal.js"></script>
 	      <script src="sdk.js"></script>
 
