@@ -1,5 +1,5 @@
 // Определяет портал и подключает только его SDK — чужие SDK не загружаются.
-// Портал можно задать вручную для локальной отладки: ?portal=yandex|poki|crazy|gamepix|vkplay|generic
+// Портал можно задать вручную для локальной отладки: ?portal=yandex|youtube|poki|crazy|gamepix|vkplay|generic
 (function () {
 
 	function getQueryParam(name) {
@@ -11,7 +11,12 @@
 	var portal = (getQueryParam('portal') || '').toLowerCase();
 
 	if (!portal) {
-		if (/(^|\.)yandex\.(ru|net|com|by|kz|uz)$/.test(host) || /(^|\.)ya\.ru$/.test(host)) { portal = 'yandex'; }
+
+		// YouTube Playables: SDK подключён статическим тегом в index.html до всего кода игры,
+		// так что ytgame.IN_PLAYABLES_ENV уже доступен (вне Playables он false и не мешает другим порталам)
+		if (typeof ytgame !== 'undefined' && ytgame.IN_PLAYABLES_ENV) { portal = 'youtube'; }
+
+		else if (/(^|\.)yandex\.(ru|net|com|by|kz|uz)$/.test(host) || /(^|\.)ya\.ru$/.test(host)) { portal = 'yandex'; }
 		else if (/(^|\.)poki(-internal)?\.(com|io)$/.test(host)) { portal = 'poki'; }
 		else if (/(^|\.)crazygames\.(com|co\.uk)$/.test(host)) { portal = 'crazy'; }
 		else if (/(^|\.)gamepix\.com$/.test(host)) { portal = 'gamepix'; }
@@ -25,6 +30,11 @@
 
 	// Для VK Play и VK Mini Apps язык по умолчанию — русский
 	if (portal === 'vkplay' || portal === 'vk') { window.lang = 'ru'; }
+	// YouTube: язык (EN) sdk.js выставит после загрузки облачного сейва — до тех пор ядро
+	// ждёт на экране загрузки, чтобы прочитать настройки уже с облачными данными
+	else if (portal === 'youtube') { window.lang = ''; }
+
+
 	// Остальные порталы без SDK-языка — язык браузера:
 	// ядро игры ждёт непустой $wnd.lang на экране загрузки
 	else if (!window.lang) { window.lang = (navigator.language || 'en').slice(0, 2).toLowerCase(); }
